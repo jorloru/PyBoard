@@ -15,3 +15,4 @@ class TurnBasedStatus():
         self.Winner = 0
         self.Turn = 1
         self.PlayerTurn = 1
+        self.LastPlayedMove = None

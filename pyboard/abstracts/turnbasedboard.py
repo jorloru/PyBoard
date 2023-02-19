@@ -7,7 +7,7 @@ Created on Sun Feb  5
 
 from abc import ABC, abstractmethod
 import numpy as np
-from pyboard import TurnBasedStatus, TurnBasedMove
+from pyboard import TurnBasedStatus, SetValueMove, MovePieceMove
 
 __all__ = 'TurnBasedBoard',
 
@@ -23,18 +23,44 @@ class TurnBasedBoard(ABC):
         
     def update_tile(self, move):
         
-        if type(move) != TurnBasedMove:
-            raise TypeError(' '.join(['Method update_tile(move) of class',type(self),'expected argument of type TurnBasedMove, but got',str(type(move))]))
+        if self.Config.MoveType == SetValueMove:
         
-        elif self._check_valid_move(move):
+            if type(move) != SetValueMove:
+                
+                raise TypeError(' '.join(['Method update_tile(move) of class',type(self),'expected argument of type TurnBasedMove, but got',str(type(move))]))
             
-            self.Board[move.Row,move.Column] = move.Value
-            self._update_status()
-            return True
+            else:
+                
+                if self._check_valid_move(move):
+                    
+                    self.Board[move.Row,move.Column] = move.Value
+                    self.Status.LastPlayedMove = move
+                    self._update_status()
+                    return True
+                
+                else:
+                    
+                    return False
+                
+        elif self.Config.MoveType == MovePieceMove:
         
-        else:
+            if type(move) != MovePieceMove:
+                
+                raise TypeError(' '.join(['Method update_tile(move) of class',type(self),'expected argument of type TurnBasedMove, but got',str(type(move))]))
             
-            return False
+            else:
+                
+                if self._check_valid_move(move):
+                    
+                    self.Board[move.RowTarget,move.ColumnTarget] = self.Board[move.RowOrigin,move.ColumnOrigin]
+                    self.Board[move.RowOrigin,move.ColumnOrigin] = 0
+                    self.Status.LastPlayedMove = move
+                    self._update_status()
+                    return True
+                
+                else:
+                    
+                    return False
         
     @abstractmethod
     def _update_status(self):
@@ -47,7 +73,7 @@ class TurnBasedBoard(ABC):
         pass
     
     @abstractmethod
-    def get_valid_moves(self):
+    def get_valid_moves(self, player):
         
         pass
 

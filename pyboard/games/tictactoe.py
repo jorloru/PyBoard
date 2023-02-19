@@ -10,7 +10,7 @@ import os
 sys.path.append(os.path.join('..','..'))
 
 import numpy as np
-from pyboard import TurnBasedStatus, TurnBasedMove, TicTacToeConfig, TurnBasedBoard
+from pyboard import TurnBasedStatus, SetValueMove, TicTacToeConfig, TurnBasedBoard
 
 __all__ = 'TicTacToe',
     
@@ -52,17 +52,23 @@ class TicTacToe(TurnBasedBoard):
         self.Status = TurnBasedStatus()
         self.Status.PlayerTurn = self.config.firstPlayer
         
-    def get_valid_moves(self):
+    def get_valid_moves(self, player):
         
         valid_moves = []
         
-        for i in range(self.Config.Rows):
+        if player not in (1,2):
             
-            for j in range(self.Config.Columns):
+            raise TypeError(' '.join(['Method get_valid_moves(player) of class',type(self),'expected argument of type int, but got',str(type(move))]))
+        
+        if player == self.Status.PlayerTurn:
+        
+            for i in range(self.Config.Rows):
+            
+                for j in range(self.Config.Columns):
                 
-                if self.Board[i,j] == 0:
+                    if self.Board[i,j] == 0:
                     
-                    valid_moves.append(TurnBasedMove(i, j, self.Status.PlayerTurn))
+                        valid_moves.append(SetValueMove(i, j, self.Status.PlayerTurn))
                     
         return valid_moves
 
@@ -114,7 +120,7 @@ if __name__ == "__main__":
                 
             else:
                 
-                if not game.update_tile(TurnBasedMove(int(move[0]), int(move[1]), game.Status.PlayerTurn)):
+                if not game.update_tile(SetValueMove(int(move[0]), int(move[1]), game.Status.PlayerTurn)):
                     
                     print("\nInvalid move! Valid positions range from '0 0' to '2 2' and are not already occupied.")
                     

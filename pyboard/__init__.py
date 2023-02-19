@@ -5,12 +5,12 @@ Created on Sun Feb 12
 @author: jorloru
 """
 
-from .basics  import *
+from .basics import *
 from .abstracts import *
 #from .agents  import *
 from .configs import *
-from .games   import *
-#from .guis    import *
+from .games import *
+#from .guielements import *
 
 __all__ = (basics.__all__ +
            abstracts.__all__ +

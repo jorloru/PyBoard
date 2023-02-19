@@ -11,10 +11,11 @@ __all__ = 'TurnBasedConfig',
 
 class TurnBasedConfig(ABC):
     
-    def __init__(self, rows=0, cols=0):
+    def __init__(self, rows, cols, movetype):
         
         self.Rows = rows
         self.Columns = cols
+        self.MoveType = movetype
         
         super().__init__()
     
