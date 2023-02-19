@@ -45,6 +45,11 @@ class TurnBasedBoard(ABC):
     def _initialize_game(self):
         
         pass
+    
+    @abstractmethod
+    def get_valid_moves(self):
+        
+        pass
 
     @abstractmethod
     def _check_valid_move(self, move):

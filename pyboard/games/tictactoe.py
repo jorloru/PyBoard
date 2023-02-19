@@ -51,6 +51,20 @@ class TicTacToe(TurnBasedBoard):
         self.Board  = np.zeros((self.config.Rows, self.config.Columns), int)
         self.Status = TurnBasedStatus()
         self.Status.PlayerTurn = self.config.firstPlayer
+        
+    def get_valid_moves(self):
+        
+        valid_moves = []
+        
+        for i in range(self.Config.Rows):
+            
+            for j in range(self.Config.Columns):
+                
+                if self.Board[i,j] == 0:
+                    
+                    valid_moves.append(TurnBasedMove(i, j, self.Status.PlayerTurn))
+                    
+        return valid_moves
 
     def _check_valid_move(self, move):
         
@@ -116,26 +130,3 @@ if __name__ == "__main__":
     else:
         print(' '.join(['\nPlayer',str(game.Status.PlayerTurn%2 + 1),'won!']))
     
-# game = TicTacToe(TicTacToeConfig())
-# print(game.Board)
-# print('\n')
-# move1 = game.update_tile(1, 1, 1)
-# status1 = game.Status.Finished
-# print(game.Board)
-# print('\n')
-# move2 = game.update_tile(0, 0, 2)
-# status2 = game.Status.Finished
-# print(game.Board)
-# print('\n')
-# move3 = game.update_tile(2, 0, 1)
-# status3 = game.Status.Finished
-# print(game.Board)
-# print('\n')
-# move4 = game.update_tile(1, 0, 2)
-# status4 = game.Status.Finished
-# print(game.Board)
-# print('\n')
-# move5 = game.update_tile(0, 2, 1)
-# status5 = game.Status.Finished
-# print(game.Board)
-# print('\n')
