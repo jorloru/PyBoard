@@ -7,17 +7,9 @@ Created on Sun Feb  5
 
 from abc import ABC, abstractmethod
 import numpy as np
+from pyboard import TurnBasedStatus, TurnBasedMove
 
-__all__ = 'TurnBasedBoard', 'TurnBasedStatus',
-
-class TurnBasedStatus():
-    
-    def __init__(self):
-        
-        self.Finished = False
-        self.Winner = 0
-        self.Turn = 1
-        self.PlayerTurn = 1
+__all__ = 'TurnBasedBoard',
 
 class TurnBasedBoard(ABC):
     
@@ -29,11 +21,14 @@ class TurnBasedBoard(ABC):
         
         super().__init__()
         
-    def update_tile(self, row, col, value):
+    def update_tile(self, move):
         
-        if self._check_valid_move(row, col, value):
+        if type(move) != TurnBasedMove:
+            raise TypeError(' '.join(['Method update_tile(move) of class',type(self),'expected argument of type TurnBasedMove, but got',str(type(move))]))
+        
+        elif self._check_valid_move(move):
             
-            self.Board[row,col] = value
+            self.Board[move.Row,move.Column] = move.Value
             self._update_status()
             return True
         
@@ -52,6 +47,6 @@ class TurnBasedBoard(ABC):
         pass
 
     @abstractmethod
-    def _check_valid_move(self, row, col, value):
+    def _check_valid_move(self, move):
         
         pass

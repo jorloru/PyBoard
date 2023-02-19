@@ -10,7 +10,7 @@ import os
 sys.path.append(os.path.join('..','..'))
 
 import numpy as np
-from pyboard import TicTacToeConfig, TurnBasedStatus, TurnBasedBoard
+from pyboard import TurnBasedStatus, TurnBasedMove, TicTacToeConfig, TurnBasedBoard
 
 __all__ = 'TicTacToe',
     
@@ -52,17 +52,17 @@ class TicTacToe(TurnBasedBoard):
         self.Status = TurnBasedStatus()
         self.Status.PlayerTurn = self.config.firstPlayer
 
-    def _check_valid_move(self, row, col, value):
+    def _check_valid_move(self, move):
         
-        if (type(row) != int) or (type(col) != int):
+        if (type(move.Row) != int) or (type(move.Column) != int) or (type(move.Value) != int):
             
             return False
         
-        elif (row < 0) or (col < 0) or (row > len(self.Board)) or (col > len(self.Board[0])):
+        elif (move.Row < 0) or (move.Column < 0) or (move.Row > len(self.Board)) or (move.Column > len(self.Board[0])):
             
             return False
         
-        elif self.Status.Finished or (self.Board[row,col] != 0) or (value != self.Status.PlayerTurn):
+        elif self.Status.Finished or (self.Board[move.Row,move.Column] != 0) or (move.Value != self.Status.PlayerTurn):
             
             return False
         
@@ -100,7 +100,7 @@ if __name__ == "__main__":
                 
             else:
                 
-                if not game.update_tile(int(move[0]), int(move[1]), game.Status.PlayerTurn):
+                if not game.update_tile(TurnBasedMove(int(move[0]), int(move[1]), game.Status.PlayerTurn)):
                     
                     print("\nInvalid move! Valid positions range from '0 0' to '2 2' and are not already occupied.")
                     

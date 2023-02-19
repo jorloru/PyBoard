@@ -8,5 +8,5 @@ Created on Sun Feb 12
 from .turnbasedboard  import *
 from .turnbasedconfig import *
 
-__all__ = (turnbasedconfig.__all__ +
-           turnbasedboard.__all__)
+__all__ = (turnbasedboard.__all__ + 
+           turnbasedconfig.__all__)
