@@ -7,7 +7,7 @@ Created on Sun Feb 12
 
 from .basics import *
 from .abstracts import *
-#from .agents  import *
+from .agents  import *
 from .configs import *
 from .games import *
 #from .guielements import *
@@ -15,4 +15,5 @@ from .games import *
 __all__ = (basics.__all__ +
            abstracts.__all__ +
            configs.__all__ +
-           games.__all__)
+           games.__all__ +
+           agents.__all__)

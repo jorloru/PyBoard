@@ -7,6 +7,8 @@ Created on Sun Feb 12
 
 from .turnbasedboard  import *
 from .turnbasedconfig import *
+from .turnbasedagent  import *
 
 __all__ = (turnbasedboard.__all__ + 
-           turnbasedconfig.__all__)
+           turnbasedconfig.__all__ +
+           turnbasedagent.__all__)
