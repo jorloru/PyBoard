@@ -42,6 +42,14 @@ class TurnBasedAgent(ABC):
         else:
             
             return self._select_move_extreme(game_board, valid_moves)
+        
+    def get_player(self):
+        
+        return self._Player
+    
+    def get_difficulty(self):
+        
+        return self._Difficulty
     
     def _select_move_random(self, valid_moves):
         
