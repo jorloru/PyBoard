@@ -5,14 +5,46 @@ Created on Sun Feb 19 2023
 @author: jorloru
 """
 
+import sys
+import os
+sys.path.append(os.path.join('..'))
+
 from abc import ABC, abstractmethod
 import random
+#from pyboard import TurnBasedBoard
 
 __all__ = 'TurnBasedAgent',
 
 class TurnBasedAgent(ABC):
     
     def __init__(self, player=1, difficulty=0):
+        
+        if type(player) != int:
+            
+            raise TypeError(' '.join(["Method __init__ of",
+                                      str(type(self)),
+                                      "expected argument 'player' to be",
+                                      str(int),
+                                      "but got",
+                                      str(type(player))]))
+            
+        if type(difficulty) != int:
+            
+            raise TypeError(' '.join(["Method __init__ of",
+                                      str(type(self)),
+                                      "expected argument 'difficulty' to be",
+                                      str(int),
+                                      "but got",
+                                      str(type(difficulty))]))
+            
+        if difficulty not in range(5):
+            
+            raise ValueError(' '.join(["Method __init__ of",
+                                      str(type(self)),
+                                      "expected argument 'difficulty' to be one of",
+                                      str(list(range(5))),
+                                      "but got",
+                                      str(difficulty)]))
         
         self._Player = player
         self._Difficulty = difficulty
@@ -74,7 +106,14 @@ class TurnBasedAgent(ABC):
     def _select_move_extreme(self, game_board, valid_moves):
         
         pass
-        
+    
+    @abstractmethod
+    def _check_board_type(self, game_board):
+    
+        pass
+    
     def play_turn(self, game_board):
+        
+        self._check_board_type(game_board)
         
         return game_board.update_tile(self._select_move(game_board))

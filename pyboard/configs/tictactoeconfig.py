@@ -17,15 +17,23 @@ class TicTacToeConfig(TurnBasedConfig):
     
     def __init__(self, firstPlayer=1):
         
+        if type(firstPlayer) != int:
+            
+            raise TypeError(' '.join(["Method __init__ of",
+                                      str(type(self)),
+                                      "expected argument 'firstPlayer' to be",
+                                      str(int),
+                                      "but got",
+                                      str(type(firstPlayer))]))
+            
+        elif firstPlayer not in (1,2):
+            
+            raise ValueError(' '.join(["Method __init__ of",
+                                      str(type(self)),
+                                      "expected argument 'firstPlayer' to be one of",
+                                      str([1,2]),
+                                      "but got",
+                                      str(firstPlayer)]))
+        
         super().__init__(rows=3, cols=3, movetype=SetValueMove)
         self.FirstPlayer = firstPlayer
-        
-    def check(self):
-        
-        if self.FirstPlayer in (1,2):
-            
-            return True
-        
-        else:
-            
-            return False
