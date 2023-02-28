@@ -70,23 +70,23 @@ Repository:
 
 Games/demos:
 - [ ] TicTacToe
- - [x] Game logic
- - [x] Easy agent
- - [x] Console demo
- - [ ] Agent of all difficulties
- - [ ] GUI demo
+  - [x] Game logic
+  - [x] Easy agent
+  - [x] Console demo
+  - [ ] Agent of all difficulties
+  - [ ] GUI demo
 - [ ] Chess
- - [ ] Game logic
- - [ ] Easy agent
- - [ ] Console demo
- - [ ] Agent of all difficulties
- - [ ] GUI demo
+  - [ ] Game logic
+  - [ ] Easy agent
+  - [ ] Console demo
+  - [ ] Agent of all difficulties
+  - [ ] GUI demo
 - [ ] Connect 4
- - [ ] Game logic
- - [ ] Easy agent
- - [ ] Console demo
- - [ ] Agent of all difficulties
- - [ ] GUI demo
+  - [ ] Game logic
+  - [ ] Easy agent
+  - [ ] Console demo
+  - [ ] Agent of all difficulties
+  - [ ] GUI demo
 - [ ] ...
 
 ### That's all!
